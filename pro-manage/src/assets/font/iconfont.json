@@ -1,0 +1,51 @@
+{
+  "id": "2031602",
+  "name": "Myapp",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10019542",
+      "name": "退出",
+      "font_class": "exittuichu",
+      "unicode": "e6cb",
+      "unicode_decimal": 59083
+    },
+    {
+      "icon_id": "10262050",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "9673159",
+      "name": "工作台",
+      "font_class": "gongzuotai",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "5287658",
+      "name": "错",
+      "font_class": "cuo",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "1311987",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "11749355",
+      "name": "锁",
+      "font_class": "suo",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    }
+  ]
+}
