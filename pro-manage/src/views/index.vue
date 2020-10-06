@@ -242,6 +242,7 @@ export default {
     }
     .subpage{
       width: 1150px;
+      position: relative;
     }
   }
 }

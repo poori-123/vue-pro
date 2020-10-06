@@ -7,5 +7,13 @@ export const LOGOUT = '/user/logout'; /* 登出 */
 
 export const GETTABLELIST = '/table/list'; /* 获取餐桌列表 */
 
+export const ADDDISHTYPE = '/dishType/add'; /* 添加菜品分类 */
+export const GETDISHTYPE = '/dishType/get'; /* 获取菜品分类 */
+export const DELDISHTYPE = '/dishType/del'; /* 删除菜品分类 */
+
+export const ADDDISH = '/dish/add'; /* 添加菜品 */
+export const GETDISHINIT = '/dish/getInit'; /* 获取菜品 */
+export const GETDISH = '/dish/get';
+
 
 

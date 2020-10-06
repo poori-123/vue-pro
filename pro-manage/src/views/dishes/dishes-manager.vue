@@ -9,16 +9,14 @@
           <label for="">菜品分类:</label>
           <select v-model="dishType" >
             <option disabled value="">请选择菜品分类</option>
-            <option value="汉堡包">汉堡包</option>
-            <option value="炸鸡">炸鸡</option>
-            <option value="盖饭">薯条</option>
+            <option v-for="item in typeList" :key="item._id" :value="item._id">{{item.typeName}}</option>
           </select>
         </div>
         <button @click="searchAction">查询</button>
       </div>
       <div class="content">
         <div class="title">
-          <span class="dishnum">菜品数量: xx件</span>
+          <span class="dishnum">菜品数量: {{length}}件</span>
           <span class="add" @click="addAction">新建</span>
         </div>
         <div class="list-header">
@@ -32,17 +30,19 @@
           <span class="dishHander">操作</span>
         </div>
         <ul class="list">
-          <li class="item">
-            <span class="dishId">10000001</span><span class="line"></span>
-            <span class="dishImg"><img src="" alt=""></span><span class="line"></span>
-            <span class="dishName">珍珠翡翠白玉汤</span><span class="line"></span>
-            <span class="dishPrice">价格：￥100.00</span><span class="line"></span>
+          <li class="item" v-for="item in list" :key="item._id">
+            <span class="dishId">{{item._id.slice(item._id.length-6,item._id.length)}}</span><span class="line"></span>
+            <span class="dishImg">
+              <img v-if="item.dishImg" :src="item.dishImg" alt="">
+              <i v-else class="img">img</i>
+            </span>
+            <span class="dishName">{{item.dishName}}</span><span class="line"></span>
+            <span class="dishPrice">价格：￥{{item.dishPrice}}</span><span class="line"></span>
             <span class="dishTag">
-              <i>上架</i>
-              <i>推荐</i>
+              <i v-for="(tag,index) in JSON.parse(item.dishTage[0])" :key="index">{{tag}}</i>
             </span><span class="line"></span>
             <span class="dishSort">1</span><span class="line"></span>
-            <span class="dishNum">100</span><span class="line"></span>
+            <span class="dishNum">{{item.dishSales}}</span><span class="line"></span>
             <span class="dishHander">
               <i>查看</i>
               <i>编辑</i>
@@ -50,17 +50,40 @@
             </span>
           </li>
         </ul>
+        <div class="pages">
+          <p>共<i>{{Math.ceil(length/6)}}</i>页/<i>{{length}}</i>条数据</p>
+          <span @click="minuPageAction" class="iconfont iconxiangzuo"></span>
+          <ul>
+            <li v-for="item in Math.ceil(length/6)" :key="item" :class="{active: item == nowPage}" @click="changePageAction(item)" >{{item}}</li>
+          </ul>
+          <span @click="addPageAction" class="iconfont iconyou"></span>
+          <div class="jump">
+            <span>跳至</span>
+            <input type="text" v-model="nowPage">
+            页
+          </div>
+        </div>
       </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
   data(){
     return {
       dishName: '',
-      dishType: ''
+      dishType: '',
+      nowPage: 1
     }
+  },
+  computed: {
+    ...mapState({
+      length: state => state.dish.listlength,
+      list: state => state.dish.list,
+      typeList: state => state.dishType.typeList
+    })
+    
   },
   methods: {
     searchAction(){
@@ -68,8 +91,32 @@ export default {
       console.log(this.dishType);
     },
     addAction(){
-      console.log('添加');
+      this.$router.push('/dishes/new-dish')
+    },
+    changePageAction(num){
+      this.nowPage = num;
+    },
+    addPageAction(){
+      this.nowPage ++;
+      if(this.nowPage >= 3){
+        this.nowPage = 3;
+      }
+    },
+    minuPageAction(){
+      this.nowPage --;
+      if(this.nowPage <= 1){
+        this.nowPage = 1;
+      }
     }
+  },
+  watch: {
+    nowPage(newVal){
+      this.$store.dispatch('dish/GETDISHINIT',newVal);
+    }
+  },
+  created(){
+    this.$store.dispatch('dish/initDish');
+    this.$store.dispatch('dishType/getTypeList');
   }
 }
 </script>
@@ -156,6 +203,7 @@ export default {
         font-size: 12px;
         color: #8d64ca;
         margin-left: 20px;
+        font-weight: bold;
       }
       .add{
         width: 70px;
@@ -210,6 +258,7 @@ export default {
       overflow: hidden;
       display: flex;
       font-size: 12px;
+      color: #333;
       text-align: center;
       line-height: 100px;
       &:nth-child(2n){
@@ -233,10 +282,109 @@ export default {
         width: 93px;
       }
       .dishHander{
+        padding: 0 30px;
         flex: 1;
+        display: flex;
+        justify-content: space-around;
+        color: #1abc9c;
+        i{
+          cursor: pointer;
+        }
+      }
+      .dishImg {
+        position: relative;
+        img{
+          position: absolute;
+          width: 80px;
+          height: 80px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+        .img{
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          background: #ccc;
+          line-height: 50px;
+        }
+      }
+      .dishTag{
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+        i{
+          line-height: 30px;
+        }
       }
     }
 
+  }
+  .pages{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 60px;
+    padding-right: 30px;
+    p{
+      line-height: 25px;
+      font-size: 12px;
+      color: #666;
+      margin-right: 20px;
+      i{
+        color: red;
+      }
+    }
+    .iconfont{
+      width: 35px;
+      height: 25px;
+      border: 1px solid #d7d7d7;
+      text-align: center;
+      line-height: 23px;
+      color: #999999;
+      margin-right: 4px;
+      border-radius: 4px;
+    }
+    ul{
+      display: flex;
+      li{
+        width: 35px;
+        height: 25px;
+        line-height: 23px;
+        text-align: center;
+        border: 1px solid #d7d7d7;
+        font-size: 12px;
+        color: #999999;
+        border-radius: 4px;
+        margin-right: 4px;
+        &.active{
+          background-color: #1abc9c;
+          border-color: #1abc9c;
+          color: #fff;
+        }
+      }
+    }
+    .jump{
+      display: flex;
+      margin-left: 16px;
+      height: 25px;
+      line-height: 25px;
+      color: #999999;
+      font-size: 12px;
+      input{
+        width: 35px;
+        height: 25px;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px;
+        margin: 0 12px;
+        padding-left: 8px;
+      }
+    }
   }
 }
 

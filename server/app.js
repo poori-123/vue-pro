@@ -30,5 +30,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use('/api/user', require('./routers/userRouter'));
 app.use('/api/table', require('./routers/tableRouter'));
+app.use('/api/dishType', require('./routers/dishTypeRouter'));
+app.use('/api/dish', require('./routers/dishRouter'));
 
 module.exports = app;

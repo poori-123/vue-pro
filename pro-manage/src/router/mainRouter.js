@@ -27,9 +27,18 @@ export default [
           name: 'dishes-manager',
           component: ()=>import(/* webpackChunkName:"dishes-manager" */ '../views/dishes/dishes-manager.vue'),
           meta: {
-            title: '菜品管理',
+            title: '菜品列表',
             icon:''
-          }
+          },
+        },
+        {
+          path: 'new-dish',
+          name: 'new-dish',
+          component: ()=>import(/* webpackChunkName:"new-dish" */ '../views/dishes/new-dish.vue'),
+          meta: {
+            title: '新建菜品',
+            icon:''
+          },
         },
         {
           path: 'type-manager',
@@ -38,8 +47,18 @@ export default [
           meta: {
             title: '分类管理',
             icon:''
-          }
+          },
         },
+        {
+          path: 'new-type',
+          name: 'new-type',
+          component: ()=>import(/* webpackChunkName:"new-type" */ '../views/dishes/new-type.vue'),
+          meta: {
+            title: '新建分类',
+            icon:''
+          },
+        },
+        
       ]
     },
     /* 台桌管理 */
