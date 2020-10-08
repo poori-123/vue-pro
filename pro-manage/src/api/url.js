@@ -14,6 +14,8 @@ export const DELDISHTYPE = '/dishType/del'; /* 删除菜品分类 */
 export const ADDDISH = '/dish/add'; /* 添加菜品 */
 export const GETDISHINIT = '/dish/getInit'; /* 获取菜品 */
 export const GETDISH = '/dish/get';
+export const DELDISH = '/dish/del'; /* 删除菜品 */
 
+export const GETORDER = '/order/getall';
 
 

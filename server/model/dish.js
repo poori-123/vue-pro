@@ -7,7 +7,7 @@ module.exports = mongoose.model('dish',{
     },
     dishType:{
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'dish-type',
+        ref: 'dishType',
         required: true,
     },
     dishIntro: String,
@@ -16,7 +16,7 @@ module.exports = mongoose.model('dish',{
         required: true,
     },
     dishUnit: String,
-    dishTage: Array,
+    dishTage: String,
     dishImg: String,
     dishSales: {
         type: Number,

@@ -33,4 +33,8 @@ app.use('/api/table', require('./routers/tableRouter'));
 app.use('/api/dishType', require('./routers/dishTypeRouter'));
 app.use('/api/dish', require('./routers/dishRouter'));
 
+app.use('/api/clientUser', require('./routers/clientUserRouter'));
+
+app.use('/api/order', require('./routers/orderRouter'));
+
 module.exports = app;

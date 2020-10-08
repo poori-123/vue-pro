@@ -1,32 +1,74 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <keep-alive>
+      <router-view class="pages"/>
+    </keep-alive>
+    
+    <div class="link">
+      <router-link to="/home" :class="{active: $route.name == 'home'}" ><span class="iconfont iconshouye"></span>首页</router-link>
+      <router-link to="/myCenter" :class="{active: $route.name == 'myCenter'}"><span class="iconfont iconwode"></span>我的</router-link>
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+export default {
+  data(){
+    return {
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    }
+  },
+  created(){
+    
+  }
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+</script>
+<style lang="scss">
+html,body,#app{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+html{
+  touch-action: none;
+}
+*{box-sizing: border-box;}
+.link{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.8rem;
+  border-top: 1px solid #e4e4e4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  a{
+    font-size: 0.12rem;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .iconfont{
+      font-size: 0.2rem;
+      margin-bottom: 0.03rem;
+    }
+    &.active{
+      color: #3bb19c;
     }
   }
+}
+.pages{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0.8rem;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.van-dialog{
+  transform-origin: center left;
+  transform: scale(1.5) translate3d(-50%,-50%,0) !important;
 }
 </style>

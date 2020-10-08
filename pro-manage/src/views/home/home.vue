@@ -22,9 +22,9 @@
         <h2>最新消息</h2>
         <div class="scroll">
           <ul>
-            <li>
-              <span class="time">12:01</span>
-              <span class="table">桌号001已下单</span>
+            <li v-for="item in orderList" :key="item._id">
+              <span class="time">{{item.time | time}}</span>
+              <span class="table">桌号{{item.tableId.tableId}}已下单</span>
               <span class="watch">查看</span>
               <span class="print">打印小票</span>
             </li>
@@ -69,6 +69,20 @@
 <script>
 import {mapState} from 'vuex';
 export default {
+  filters: {
+    time(str){
+      var d = new Date(Number(str));
+      var hh = d.getHours();
+      var mm = d.getMinutes();
+      if(hh < 10){
+        hh = '0' + hh;
+      }
+      if(mm < 10){
+        mm = '0' + mm
+      };
+      return hh + ':' + mm
+    }
+  },
   data(){
     return {
 
@@ -76,7 +90,8 @@ export default {
   },
   computed: {
     ...mapState({
-      tableList: state => state.table.tableList
+      tableList: state => state.table.tableList,
+      orderList: state => state.order.orderList
     }),
     inuseList(){
       return this.tableList.filter(item => item.status == 'inuse');
@@ -87,6 +102,7 @@ export default {
   },
   created(){
     this.$store.dispatch('table/getTableList');
+    this.$store.dispatch('order/getOrder');
   }
 }
 </script>

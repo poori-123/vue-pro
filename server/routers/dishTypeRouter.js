@@ -18,6 +18,7 @@ router.post('/add', async (req,res)=>{
     
 });
 
+/* 后台获取菜品分类 */
 router.get('/get', async (req,res)=>{
     var result = await dishType.find().sort({typeSort: 1});
     if(result){
@@ -35,6 +36,16 @@ router.post('/del', async (req,res)=>{
         res.status(200).json({code:0, message: '删除成功!'});
     }else{
         res.status(200).json({code:-1, message: '删除失败!'});
+    }
+})
+
+/* 客户端获取菜品分类 */
+router.get('/getApp', async (req,res)=>{
+    var result = await dishType.find({typeShowNav: true}).sort({typeSort:1});
+    if(result){
+        res.status(200).json({code:0, message: '获取成功!', type: result});
+    }else{
+        res.status(200).json({code:-1, message: '获取失败!'});
     }
 })
 

@@ -39,14 +39,14 @@
             <span class="dishName">{{item.dishName}}</span><span class="line"></span>
             <span class="dishPrice">价格：￥{{item.dishPrice}}</span><span class="line"></span>
             <span class="dishTag">
-              <i v-for="(tag,index) in JSON.parse(item.dishTage[0])" :key="index">{{tag}}</i>
+              <i v-for="(tag,index) in JSON.parse(item.dishTage)" :key="index">{{tag}}</i>
             </span><span class="line"></span>
             <span class="dishSort">1</span><span class="line"></span>
             <span class="dishNum">{{item.dishSales}}</span><span class="line"></span>
             <span class="dishHander">
               <i>查看</i>
               <i>编辑</i>
-              <i>删除</i>
+              <i @click="delAction(item._id)" >删除</i>
             </span>
           </li>
         </ul>
@@ -69,6 +69,8 @@
 
 <script>
 import {mapState} from 'vuex';
+import http from '../../api/http';
+import {DELDISH} from '../../api/url';
 export default {
   data(){
     return {
@@ -106,6 +108,15 @@ export default {
       this.nowPage --;
       if(this.nowPage <= 1){
         this.nowPage = 1;
+      }
+    },
+    async delAction(id){
+      var res = await http.get(DELDISH, {id});
+      if(res.data.code == 0){
+        alert('删除成功!');
+        location.reload();
+      }else{
+        alert('删除失败!');
       }
     }
   },
@@ -215,6 +226,7 @@ export default {
         color: #fff;
         background: #7764ca;
         border-radius: 3px;
+        cursor: pointer;
       }
     }
     .list-header{
@@ -362,6 +374,7 @@ export default {
         color: #999999;
         border-radius: 4px;
         margin-right: 4px;
+        cursor: pointer;
         &.active{
           background-color: #1abc9c;
           border-color: #1abc9c;

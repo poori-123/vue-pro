@@ -6,6 +6,7 @@ Vue.use(Vuex)
 import table from './module/table';
 import dishType from './module/dishType';
 import dish from './module/dish';
+import order from './module/order';
 
 export default new Vuex.Store({
   state: {
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     table,
     dishType,
-    dish
+    dish,
+    order
   }
 })
