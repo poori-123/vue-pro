@@ -45,7 +45,7 @@
             <span class="dishNum">{{item.dishSales}}</span><span class="line"></span>
             <span class="dishHander">
               <i>查看</i>
-              <i>编辑</i>
+              <i @click="editAction(item._id)">编辑</i>
               <i @click="delAction(item._id)" >删除</i>
             </span>
           </li>
@@ -64,6 +64,8 @@
           </div>
         </div>
       </div>
+
+      <router-view/>
   </div>
 </template>
 
@@ -93,7 +95,22 @@ export default {
       console.log(this.dishType);
     },
     addAction(){
-      this.$router.push('/dishes/new-dish')
+      this.$router.push({
+        name: 'new-dish',
+        params: {
+          type: 'add',
+          id: '000'
+        }
+      })
+    },
+    editAction(id){
+      this.$router.push({
+        name: 'new-dish',
+        params: {
+          type: 'edit',
+          id
+        }
+      })
     },
     changePageAction(num){
       this.nowPage = num;
@@ -123,6 +140,11 @@ export default {
   watch: {
     nowPage(newVal){
       this.$store.dispatch('dish/GETDISHINIT',newVal);
+    },
+    '$route.name'(newVal,oldVal){
+      if(oldVal == 'new-dish'){
+        location.reload();
+      }
     }
   },
   created(){

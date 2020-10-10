@@ -14,20 +14,22 @@
           <p><input type="radio" :value="false" v-model="showNav">否</p>
       </div>
       <div class="sub">
-          <span @click="subAction">提交</span>
+          <span v-if="htype == 'add'" @click="subAction">添加</span>
+          <span v-if="htype == 'edit'" @click="editAction">修改</span>
       </div>
   </div>
 </template>
 
 <script>
 import http from '../../api/http';
-import {ADDDISHTYPE} from '../../api/url';
+import {ADDDISHTYPE, GETTYPEDETAIL, EDITTYPE} from '../../api/url';
 export default {
     data(){
         return {
             name: '',
             sort: '',
-            showNav: true
+            showNav: true,
+            htype: ''
         }
     },
     methods: {
@@ -49,6 +51,37 @@ export default {
             }else{
                 alert('添加失败!');
             }
+        },
+        async editAction(){
+            if(this.name == '' || this.sort == ''){
+                alert('输入不能为空!');
+                return ;
+            }
+            var res = await http.get(EDITTYPE, {
+                id: this.id,
+                typeName: this.name,
+                typeSort: this.sort,
+                typeShowNav: this.showNav
+            });
+            if(res.data.code == 0){
+                alert('修改成功!');
+                this.$router.push({
+                    name: 'type-manager'
+                })
+            }else{
+                alert('修改失败!');
+            }
+        }
+    },
+    async created(){
+        var {type,id} = this.$route.params;
+        this.htype = type;
+        this.id = id;
+        if(type == 'edit'){
+            var { data: {data} } = await http.get(GETTYPEDETAIL, {id});
+            this.name = data.typeName;
+            this.sort = data.typeSort;
+            this.showNav = data.typeShowNav
         }
     }
 }
@@ -58,6 +91,11 @@ export default {
 .new-type{
     background: #fff;
     padding-top: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
     >div{
         display: flex;
         align-items: center;

@@ -13,7 +13,7 @@ export default{
         },
         setList(state,payload){
             state.list = payload;
-        }
+        },
     },
     actions: {
         async initDish(store){

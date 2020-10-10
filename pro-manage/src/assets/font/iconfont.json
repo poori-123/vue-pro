@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1474234",
+      "name": "完成",
+      "font_class": "wancheng",
+      "unicode": "e844",
+      "unicode_decimal": 59460
+    },
+    {
       "icon_id": "1265482",
       "name": "右",
       "font_class": "you",

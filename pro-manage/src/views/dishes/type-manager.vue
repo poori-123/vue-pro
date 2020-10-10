@@ -30,11 +30,12 @@
           </span><span class="line"></span>
           <span class="typeSort">{{item.typeSort}}</span><span class="line"></span>
           <span class="typeHander">
-            <b>编辑</b>
+            <b @click="editAction(item._id)">编辑</b>
             <b @click="delAction(item._id)">删除</b>
           </span>
         </li>
       </ul>
+      <router-view/>
   </div>
 </template>
 
@@ -55,7 +56,20 @@ export default {
   methods: {
     addType(){
       this.$router.push({
-        name: 'new-type'
+        name: 'new-type',
+        params: {
+          type: 'add',
+          id: '000'
+        }
+      });
+    },
+    editAction(id){
+      this.$router.push({
+        name: 'new-type',
+        params: {
+          type: 'edit',
+          id
+        }
       });
     },
     async delAction(id){
@@ -66,6 +80,13 @@ export default {
         location.reload();
       }else{
         alert('删除失败!')
+      }
+    }
+  },
+  watch:{
+    '$route.name'(newVal,oldVal){
+      if(oldVal == 'new-type'){
+        location.reload();
       }
     }
   },

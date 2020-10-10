@@ -16,6 +16,15 @@ export const GETDISHINIT = '/dish/getInit'; /* 获取菜品 */
 export const GETDISH = '/dish/get';
 export const DELDISH = '/dish/del'; /* 删除菜品 */
 
-export const GETORDER = '/order/getall';
+export const GETORDER = '/order/getall'; /* 后台首页获取订单列表 */
 
+export const GETDISHDETAIL = '/dish/getDetail'; /* 获取菜品详情 */
+export const EDITDISH = '/dish/editDish'; /* 修改菜品 */
+
+export const GETTYPEDETAIL = '/dishType/getDetail'; /* 获取菜品分类详情 */
+export const EDITTYPE = '/dishType/editType'; /* 修改菜品分类 */
+
+export const GETORDERPAGE = '/order/getPage'; /* 订单列表页分页获取订单 */
+
+export const GETORDERDETAIL = '/order/getDetail';
 

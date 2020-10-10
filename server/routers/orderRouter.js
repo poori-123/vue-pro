@@ -37,6 +37,27 @@ router.get('/getall', async (req,res)=>{
     var result = await Order.find().sort({time: -1}).populate(['tableId']);
 
     res.status(200).json({code:0,message: '获取成功!', data: result});
+});
+
+router.get('/getPage', async (req,res)=>{
+    var page = url.parse(req.url, true).query.page;
+
+    var result = await Order.find().skip(10*(page-1)).limit(10).populate(['tableId']);
+    if(result){
+        res.status(200).json({code:0, message: '获取成功!', data: result});
+    }else{
+        res.status(200).json({code: -1, message: '获取失败!'});
+    }
+})
+
+router.get('/getDetail', async (req,res)=>{
+    var id =url.parse(req.url,true).query.id;
+    var result = await Order.findById(id).populate(['tableId']);
+    if(result){
+        res.json({code: 0, message: '获取成功!', data: result});
+    }else{
+        res.json({code: -1, message: '获取失败!'});
+    }
 })
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require('express');
 const dishType = require('../model/dish-type');
+const url = require('url');
 
 const router = new express.Router();
 
@@ -46,6 +47,28 @@ router.get('/getApp', async (req,res)=>{
         res.status(200).json({code:0, message: '获取成功!', type: result});
     }else{
         res.status(200).json({code:-1, message: '获取失败!'});
+    }
+});
+
+router.get('/getDetail', async (req,res)=>{
+    var {id} = url.parse(req.url,true).query;
+    var result = await dishType.findById(id);
+    if(result){
+        res.json({code: 0, message: '获取成功!', data: result});
+    }else{
+        res.json({code: -1, message: '获取失败!'});
+    }
+})
+
+router.get('/editType', async (req,res)=>{
+    var query = url.parse(req.url,true).query;
+    var id = query.id;
+    delete query.id;
+    var result = await dishType.findByIdAndUpdate(id,query);
+    if(result){
+        res.json({code: 0, message: '修改成功!'})
+    }else{
+        res.json({code: -1, message: '修改失败!'});
     }
 })
 

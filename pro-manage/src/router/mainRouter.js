@@ -30,15 +30,17 @@ export default [
             title: '菜品列表',
             icon:''
           },
-        },
-        {
-          path: 'new-dish',
-          name: 'new-dish',
-          component: ()=>import(/* webpackChunkName:"new-dish" */ '../views/dishes/new-dish.vue'),
-          meta: {
-            title: '新建菜品',
-            icon:''
-          },
+          children: [
+            {
+              path: 'new-dish/:type/:id',
+              name: 'new-dish',
+              component: ()=>import(/* webpackChunkName:"new-dish" */ '../views/dishes/new-dish.vue'),
+              meta: {
+                title: '新建菜品',
+                icon:''
+              },
+            },
+          ]
         },
         {
           path: 'type-manager',
@@ -48,16 +50,19 @@ export default [
             title: '分类管理',
             icon:''
           },
+          children: [
+            {
+              path: 'new-type/:type/:id',
+              name: 'new-type',
+              component: ()=>import(/* webpackChunkName:"new-type" */ '../views/dishes/new-type.vue'),
+              meta: {
+                title: '新建分类',
+                icon:''
+              },
+            },
+          ]
         },
-        {
-          path: 'new-type',
-          name: 'new-type',
-          component: ()=>import(/* webpackChunkName:"new-type" */ '../views/dishes/new-type.vue'),
-          meta: {
-            title: '新建分类',
-            icon:''
-          },
-        },
+        
         
       ]
     },
@@ -133,6 +138,17 @@ export default [
             title: '统计列表',
             icon:''
           },
+          children: [
+            {
+              path: 'detail/:id',
+              name: 'order-detail',
+              component: ()=>import(/* webpackChunkName:"order-detail" */ '../views/order/order-detail.vue'),
+              meta: {
+                title: '订单详情',
+                icon:''
+              },
+            }
+          ]
         },
       ]
     },

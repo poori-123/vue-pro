@@ -44,7 +44,8 @@
             <input type="text" v-model="imgSrc">
         </div>
         <div class="over">
-            <span @click="submitAction">完成，提交菜品</span>
+            <span v-if="htype == 'add'" @click="submitAction">完成，提交菜品</span>
+            <span v-if="htype == 'edit'" @click="editAction">确认修改</span>
         </div>
 
     </div>
@@ -54,7 +55,7 @@
 import { Upload, Button, Icon } from 'ant-design-vue';
 import {mapState} from 'vuex';
 import http from '../../api/http';
-import {ADDDISH} from '../../api/url';
+import {ADDDISH, GETDISHDETAIL, EDITDISH} from '../../api/url';
 export default {
     components: {
         [Upload.name]: Upload,
@@ -79,6 +80,7 @@ export default {
                     thumbUrl: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1938454942,2117040084&fm=26&gp=0.jpg',
                 },
             ],
+            htype: ''
         }
     },
     computed: {
@@ -121,10 +123,55 @@ export default {
             }else{
                 alert('添加失败!')
             }
+        },
+        async editAction(){
+            if(this.name == ''){
+                alert('菜品名称必填!');
+                return;
+            }
+            if(this.type == ''){
+                alert('菜品分类必填!');
+                return;
+            }
+            if(this.price == ''){
+                alert('菜品价格必填!');
+                return;
+            }
+            var res = await http.get(EDITDISH,{
+                id: this.id,
+                dishName: this.name,
+                dishType: this.type,
+                dishIntro: this.intro,
+                dishPrice: this.price,
+                dishUnit: this.unit,
+                dishTage: JSON.stringify(this.tag),
+                dishImg: this.imgSrc,
+            });
+            if(res.data.code == 0){
+                alert('修改成功!');
+                this.$router.push({
+                    name: 'dishes-manager'
+                })
+            }else{
+                alert('修改失败!')
+            }
         }
     },
-    created(){
+    async created(){
         this.$store.dispatch('dishType/getTypeList');
+        var {type,id} = this.$route.params;
+        this.htype = type;
+        this.id = id;
+        if( type == 'edit'){
+            var {data: {data}} = await http.get(GETDISHDETAIL, {id});
+            this.name = data.dishName;
+            this.type = data.dishType;
+            this.intro = data.dishIntro;
+            this.price = data.dishPrice;
+            this.unit = data.dishUnit;
+            this.tag = JSON.parse(data.dishTage);
+            this.imgSrc = data.dishImg;
+        }
     }
 }
 </script>
@@ -280,6 +327,11 @@ export default {
 </style>
 <style lang="scss">
 .new-dish{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
     .img{
         >div{
             .ant-upload{

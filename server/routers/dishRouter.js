@@ -61,6 +61,27 @@ router.get('/del', async (req,res)=>{
     }
 })
 
+router.get('/getDetail', async (req,res)=>{
+    var {id} = url.parse(req.url,true).query;
+    var result = await dish.findById(id);
+    if(result){
+        res.json({code:0, message:'获取成功!', data: result})
+    }else{
+        res.json({code: -1, message: '获取失败!'})
+    }
+});
+
+router.get('/editDish', async (req,res)=>{
+    var query = url.parse(req.url,true).query;
+    var id = query.id;
+    delete query.id;
+    var result = await dish.findByIdAndUpdate(id,query);
+    if(result){
+        res.json({code: 0, message: '修改成功!'})
+    }else{
+        res.json({code: -1, message: '修改失败!'});
+    }
+})
 
 /* 客户端获取所有菜品列表 */
 router.get('/getAll', async (req,res)=>{
