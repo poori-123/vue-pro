@@ -33,6 +33,12 @@ router.get('/get', async (req,res)=>{
     res.status(200).json({code:0, message:'获取成功！', data:result});
 });
 
+router.get('/getHomeOrder', async (req,res)=>{
+    var result = await Order.find().sort({time: -1}).populate(['tableId']).limit(10);
+
+    res.status(200).json({code:0,message: '获取成功!', data: result});
+});
+
 router.get('/getall', async (req,res)=>{
     var result = await Order.find().sort({time: -1}).populate(['tableId']);
 

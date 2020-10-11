@@ -16,7 +16,7 @@ router.post('/login', async (req,res)=>{
     var result = await User.findOne({username,password},{password: false});
     if(result){
         req.session.user = result;
-        res.status(200).json({code: 0, message: '登录成功!'});
+        res.status(200).json({code: 0, message: '登录成功!', data: result});
     }else{
         res.status(200).json({code: -1, message: '用户名或密码错误!'});
     }
@@ -31,6 +31,21 @@ router.post('/resetpsd', async (req,res)=>{
         res.status(200).json({code:0,message:'密码重置成功!'});
     }else{
         res.status(200).json({code:-1,message:'账号不存在!'});
+    }
+})
+
+router.post('/register', async (req,res)=>{
+    var {username, password, auth} = req.body;
+    var result = await User.findOne({username});
+    if(result){
+        res.json({code: -1, message: '用户名已被占用!'});
+        return
+    }
+    var nu = await new User({username, password, auth}).save();
+    if(nu){
+        res.json({code: 0, message: '添加成功!'});
+    }else{
+        res.json({code: -1, message: '添加失败!'});
     }
 })
 

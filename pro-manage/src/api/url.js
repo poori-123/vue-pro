@@ -16,7 +16,9 @@ export const GETDISHINIT = '/dish/getInit'; /* 获取菜品 */
 export const GETDISH = '/dish/get';
 export const DELDISH = '/dish/del'; /* 删除菜品 */
 
-export const GETORDER = '/order/getall'; /* 后台首页获取订单列表 */
+export const GETHOMEORDER = '/order/getHomeOrder'; /* 后台首页获取前十条订单 */
+
+export const GETORDER = '/order/getall'; /* 后台获取所有订单列表 */
 
 export const GETDISHDETAIL = '/dish/getDetail'; /* 获取菜品详情 */
 export const EDITDISH = '/dish/editDish'; /* 修改菜品 */
@@ -27,4 +29,8 @@ export const EDITTYPE = '/dishType/editType'; /* 修改菜品分类 */
 export const GETORDERPAGE = '/order/getPage'; /* 订单列表页分页获取订单 */
 
 export const GETORDERDETAIL = '/order/getDetail';
+
+export const GETTOPTENDISH = '/dish/topTen';
+
+export const REGISTER = '/user/register'; /* 添加用户 */
 

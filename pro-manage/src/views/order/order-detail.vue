@@ -123,8 +123,6 @@ export default {
             id
         });
         this.order = data;
-        console.log(data);
-        console.log(JSON.parse(data.orderList));
     }
 }
 </script>

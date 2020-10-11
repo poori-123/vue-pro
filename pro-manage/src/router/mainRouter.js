@@ -6,7 +6,8 @@ export default [
       component: ()=>import(/* webpackChunkName:"home" */ '../views/home/home'),
       meta: {
         title: '工作台',
-        icon:''
+        icon:'',
+        auth: ['A','B','C']
       }
     },
     /* 菜品管理 */
@@ -18,7 +19,8 @@ export default [
       },
       meta: {
         title: '菜品管理',
-        icon:''
+        icon:'',
+        auth: ['A','B']
       },
       redirect: '/dishes/dishes-manager',
       children: [
@@ -28,7 +30,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"dishes-manager" */ '../views/dishes/dishes-manager.vue'),
           meta: {
             title: '菜品列表',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
           children: [
             {
@@ -37,7 +40,8 @@ export default [
               component: ()=>import(/* webpackChunkName:"new-dish" */ '../views/dishes/new-dish.vue'),
               meta: {
                 title: '新建菜品',
-                icon:''
+                icon:'',
+                auth: ['A','B']
               },
             },
           ]
@@ -48,7 +52,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"type-manager" */ '../views/dishes/type-manager.vue'),
           meta: {
             title: '分类管理',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
           children: [
             {
@@ -57,7 +62,8 @@ export default [
               component: ()=>import(/* webpackChunkName:"new-type" */ '../views/dishes/new-type.vue'),
               meta: {
                 title: '新建分类',
-                icon:''
+                icon:'',
+                auth: ['A','B']
               },
             },
           ]
@@ -75,7 +81,8 @@ export default [
       },
       meta: {
         title: '台桌管理',
-        icon:''
+        icon:'',
+        auth: ['A','B','C']
       },
       redirect: '/table/table-setting',
       children: [
@@ -85,7 +92,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"table-setting" */ '../views/table/table-setting.vue'),
           meta: {
             title: '台桌管理',
-            icon:''
+            icon:'',
+            auth: ['A','B','C']
           },
         },
         {
@@ -94,7 +102,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"table-type" */ '../views/table/table-type.vue'),
           meta: {
             title: '桌型管理',
-            icon:''
+            icon:'',
+            auth: ['A','B','C']
           },
         },
         {
@@ -103,7 +112,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"table-manager" */ '../views/table/table-manager.vue'),
           meta: {
             title: '桌位管理',
-            icon:''
+            icon:'',
+            auth: ['A','B','C']
           },
         },
       ]
@@ -117,7 +127,8 @@ export default [
       },
       meta: {
         title: '订单统计',
-        icon:''
+        icon:'',
+        auth: ['A','B','C']
       },
       redirect: '/order/order-sum',
       children: [
@@ -127,7 +138,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"order-sum" */ '../views/order/order-sum.vue'),
           meta: {
             title: '订单统计',
-            icon:''
+            icon:'',
+            auth: ['A','B','C']
           },
         },
         {
@@ -136,7 +148,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"order-list" */ '../views/order/order-list.vue'),
           meta: {
             title: '统计列表',
-            icon:''
+            icon:'',
+            auth: ['A','B','C']
           },
           children: [
             {
@@ -145,7 +158,8 @@ export default [
               component: ()=>import(/* webpackChunkName:"order-detail" */ '../views/order/order-detail.vue'),
               meta: {
                 title: '订单详情',
-                icon:''
+                icon:'',
+                auth: ['A','B','C']
               },
             }
           ]
@@ -159,7 +173,8 @@ export default [
       component: ()=>import(/* webpackChunkName:"shop" */ '../views/shop/shop-setting'),
       meta: {
         title: '门店设置',
-        icon:''
+        icon:'',
+        auth: ['A']
       },
     },
     /* 营销管理 */
@@ -171,7 +186,8 @@ export default [
       },
       meta: {
         title: '营销管理',
-        icon:''
+        icon:'',
+        auth: ['A']
       },
       redirect: '/market/full-reduction',
       children: [
@@ -181,7 +197,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"full-reduction" */ '../views/market/full-reduction.vue'),
           meta: {
             title: '满减卷',
-            icon:''
+            icon:'',
+            auth: ['A']
           },
         },
         {
@@ -190,7 +207,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"time-limit" */ '../views/market/time-limit.vue'),
           meta: {
             title: '限时折扣',
-            icon:''
+            icon:'',
+            auth: ['A']
           },
         },
         {
@@ -199,7 +217,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"new-people" */ '../views/market/new-people.vue'),
           meta: {
             title: '新人卷',
-            icon:''
+            icon:'',
+            auth: ['A']
           },
         },
         {
@@ -208,7 +227,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"coupon-stack" */ '../views/market/coupon-stack.vue'),
           meta: {
             title: '优惠卷叠加',
-            icon:''
+            icon:'',
+            auth: ['A']
           },
         },
       ]
@@ -222,7 +242,8 @@ export default [
       },
       meta: {
         title: '排队取号',
-        icon:''
+        icon:'',
+        auth: ['A','B']
       },
       redirect: '/lineup/lineup-list',
       children: [
@@ -232,7 +253,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"lineup-list" */ '../views/lineup/lineup-list.vue'),
           meta: {
             title: '排队列表',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
         },
         {
@@ -241,7 +263,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"lineup-setting" */ '../views/lineup/lineup-setting.vue'),
           meta: {
             title: '取号设置',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
         },
       ]
@@ -255,7 +278,8 @@ export default [
       },
       meta: {
         title: '餐桌预定',
-        icon:''
+        icon:'',
+        auth: ['A','B']
       },
       redirect: '/reserve/reserve-list',
       children: [
@@ -265,7 +289,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"reserve-list" */ '../views/reserve/reserve-list.vue'),
           meta: {
             title: '预定列表',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
         },
         {
@@ -274,7 +299,8 @@ export default [
           component: ()=>import(/* webpackChunkName:"reserve-setting" */ '../views/reserve/reserve-setting.vue'),
           meta: {
             title: '预定设置',
-            icon:''
+            icon:'',
+            auth: ['A','B']
           },
         },
       ]
@@ -286,7 +312,8 @@ export default [
       component: ()=>import(/* webpackChunkName:"staff" */ '../views/staff/staff-manager'),
       meta: {
         title: '员工管理',
-        icon:''
+        icon:'',
+        auth: []
       },
     },
     /* 角色管理 */
@@ -296,7 +323,8 @@ export default [
       component: ()=>import(/* webpackChunkName:"role" */ '../views/role/role-manager'),
       meta: {
         title: '角色管理',
-        icon:''
+        icon:'',
+        auth: []
       },
     },
   ]

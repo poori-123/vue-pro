@@ -16,17 +16,17 @@ const routes = [
       {
         path: 'confirmOrder',
         name: 'confirmOrder',
-        component: () => import ('../views/confirmOrder.vue'),
+        component: () => import (/* webpackChunkName:"confirmOrder" */ '../views/confirmOrder.vue'),
         children: [
           {
             path: 'success/:id',
             name: 'success',
-            component: () => import ('../views/order/success.vue')
+            component: () => import (/* webpackChunkName:"success" */ '../views/order/success.vue')
           },
           {
             path: 'error',
             name: 'error',
-            component: () => import ('../views/order/error.vue')
+            component: () => import (/* webpackChunkName:"error" */ '../views/order/error.vue')
           }
         ]
       }
@@ -35,24 +35,24 @@ const routes = [
   {
     path: '/myCenter',
     name: 'myCenter',
-    component: () => import('../views/myCenter.vue'),
+    component: () => import(/* webpackChunkName:"myCenter" */ '../views/myCenter.vue'),
     children: [
       {
         path: 'orderList/:id',
         name: 'orderList',
-        component: () => import ('../views/user/orderList.vue')
+        component: () => import (/* webpackChunkName:"orderList" */ '../views/user/orderList.vue')
       }
     ]
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/user/login.vue')
+    component: () => import(/* webpackChunkName:"login" */ '../views/user/login.vue')
   },
   {
     path: '/add',
     name: 'add',
-    component: () => import('../views/user/add.vue')
+    component: () => import(/* webpackChunkName:"add" */ '../views/user/add.vue')
   },
   {
     path: '/',

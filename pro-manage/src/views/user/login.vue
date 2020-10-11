@@ -54,6 +54,7 @@ export default {
                 }else{
                     localStorage.removeItem('user');
                 }
+                localStorage.setItem('loguser', JSON.stringify(res.data.data));
                 this.$router.push('/home');
             }
         },

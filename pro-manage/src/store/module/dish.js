@@ -1,10 +1,11 @@
 import http from '../../api/http';
-import {GETDISHINIT,GETDISH} from '../../api/url';
+import {GETDISHINIT,GETDISH, GETTOPTENDISH} from '../../api/url';
 export default{
     namespaced: true,
     state: {
         listlength: 0,
         list: [],
+        topTen: []
     },
     mutations: {
         setInit(state,payload){
@@ -14,6 +15,9 @@ export default{
         setList(state,payload){
             state.list = payload;
         },
+        setTopTen(state,payload){
+            state.topTen = payload;
+        }
     },
     actions: {
         async initDish(store){
@@ -26,6 +30,16 @@ export default{
         async GETDISHINIT(store,payload){
             var {data: {data}} = await http.get(GETDISH,{page: payload});
             store.commit('setList',data);
+        },
+        async getTopTen(store,payload){
+            var {data: {data}} = await http.get(GETTOPTENDISH);
+            data = data.map( item => ({
+                name: item.dishName,
+                img: item.dishImg,
+                sales: item.dishSales,
+                id: item._id
+            }));
+            store.commit('setTopTen', data);
         }
     }
 }

@@ -91,7 +91,7 @@ export default {
   computed: {
     ...mapState({
       tableList: state => state.table.tableList,
-      orderList: state => state.order.orderList
+      orderList: state => state.order.homeOrder
     }),
     inuseList(){
       return this.tableList.filter(item => item.status == 'inuse');
@@ -102,7 +102,7 @@ export default {
   },
   created(){
     this.$store.dispatch('table/getTableList');
-    this.$store.dispatch('order/getOrder');
+    this.$store.dispatch('order/getHomeOrder');
   }
 }
 </script>

@@ -57,6 +57,7 @@ import { Layout, Menu, Icon, Breadcrumb } from 'ant-design-vue';
 import mainRouter from '../router/mainRouter';
 import http from '../api/http';
 import {LOGOUT} from '../api/url';
+import { log } from '@antv/g2plot/lib/utils';
 export default {
   components: {
     [Layout.name]: Layout,
@@ -99,6 +100,7 @@ export default {
       this.$router.push({
         name: key
       })
+      
     },
     async logoutAction(){
       var res = await http.get(LOGOUT);
@@ -119,6 +121,11 @@ export default {
   float: left;
 }
 #app{
+  .page{
+    >.ant-layout{
+      height: 100%;
+    }
+  }
   .index{
     .ant-layout-header{
       height: 80px;

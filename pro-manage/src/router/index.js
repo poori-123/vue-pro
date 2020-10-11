@@ -15,7 +15,15 @@ const routes = [
     path: '/',
     component: ()=>import(/* webpackChunkName:"index" */ '../views/index.vue'),
     redirect: '/home',
-    children: mainRouter
+    children: [
+      ...mainRouter,
+      /* 403权限不足 */
+      {
+        path: '403',
+        name: '403',
+        component: () => import(/* webpackChunkName:"403" */ '../views/403.vue'),
+      }
+    ]
   },
   {
     path: '/user',
@@ -37,7 +45,7 @@ const routes = [
   },
   {
     path: '*',
-    component: ()=>import('../views/404.vue')
+    component: ()=>import(/* webpackChunkName:"404" */ '../views/404.vue')
   }
 ]
 
@@ -58,6 +66,27 @@ router.beforeEach( async(to, from, next)=>{
       next();
     }
   }
-} )
+} );
+
+router.beforeEach( (to,from,next)=>{
+  var user = JSON.parse(localStorage.getItem('loguser'));
+  if(user.isAdmin){
+    next();
+  }else{
+    if(!to.meta.auth){
+      next();
+    }else{
+      var index = to.meta.auth.findIndex(item => item == user.auth);
+      if(index !== -1){
+        next()
+      }else{
+        
+        next({name: '403'});
+       
+      }
+      
+    }
+  }
+})
 
 export default router

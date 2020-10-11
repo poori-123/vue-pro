@@ -12,5 +12,9 @@ module.exports = mongoose.model('user',{
     isAdmin:{
         type: Boolean,
         default: false
+    },
+    auth: {
+        type: String,
+        default: 'C'
     }
 })

@@ -94,4 +94,13 @@ router.get('/getAll', async (req,res)=>{
     }
 })
 
+router.get('/topTen', async (req,res)=>{
+    var result = await dish.find().sort({dishSales: -1}).limit(10);
+    if(result){
+        res.json({code: 0, message: '获取成功!', data: result});
+    }else{
+        res.json({code: -1, message: '获取失败!'})
+    }
+})
+
 module.exports = router;

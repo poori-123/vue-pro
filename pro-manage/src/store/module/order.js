@@ -1,13 +1,17 @@
 import http from '../../api/http';
-import {GETORDER, GETORDERPAGE} from '../../api/url';
+import {GETORDER, GETORDERPAGE, GETHOMEORDER} from '../../api/url';
 export default {
     namespaced: true,
     state: {
+        homeOrder: [],
         orderList: [],
         length: 0,
         orders: []
     },
     mutations: {
+        setHomeOrder(state,payload){
+            state.homeOrder = payload;
+        },
         setOrder(state,payload){
             state.orderList = payload;
         },
@@ -20,9 +24,19 @@ export default {
         }
     },
     actions: {
+        async getHomeOrder(store){
+            var {data: {data}} = await http.get(GETHOMEORDER);
+            // console.log(data);
+            store.commit('setHomeOrder', data);
+        },
         async getOrder(store){
             var {data: {data}} = await http.get(GETORDER);
             // console.log(data);
+            data = data.map(item => ({
+                id: item._id,
+                price: item.money,
+                time: Number(item.time)
+            }))
             store.commit('setOrder', data);
         },
         async getOrderInit(store){
