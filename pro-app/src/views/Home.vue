@@ -45,6 +45,7 @@
             <div class="list">
                 <ul class="type-list">
                     <li v-for="item in dishList" :key="item.ti" @click="change(item.ti)" :class="{active: item.ti == chooseId}">{{item.tn}}</li>
+                    <div class="list-bot"></div>
                 </ul>
                 <ul class="dish-list">
                     <li v-for="item in list" :key="item._id">
@@ -63,6 +64,7 @@
                             </h6>
                         </div>
                     </li>
+                    <div class="list-bot"></div>
                 </ul>
             </div>
         </div>
@@ -372,6 +374,10 @@ export default {
                     }
                 }
             }
+            .list-bot{
+                width: 100%;
+                height: 0.5rem;
+            }
             .dish-list{
                 width: calc(100% - 0.95rem);
                 background: #fff;
@@ -398,6 +404,10 @@ export default {
                             line-height: 0.23rem;
                             font-size: 0.15rem;
                             color: #333;
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                         h3{
                             width: max-content;

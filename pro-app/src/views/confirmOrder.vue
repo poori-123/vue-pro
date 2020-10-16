@@ -39,9 +39,9 @@
             <b><i>￥</i>{{ totP - (Number(minusP) + Math.floor(totP/10) * 3) }}</b>
         </p>
         </div>
-        <div class="num">
+        <div class="num" @click="showAction(true)">
             <p>就餐人数</p>
-            <p @click="showAction(true)">{{pNum}}人<span class="iconfont iconyou"></span></p>
+            <p >{{pNum}}人<span class="iconfont iconyou"></span></p>
         </div>
         <div class="remark">
             <span>备注</span>
@@ -327,7 +327,7 @@ export default {
             width: 100%;
             bottom: 0;
             background: #fff;
-            padding-bottom: 0.4rem;
+            padding-bottom: 0.8rem;
             p{
                 height: 0.4rem;
                 line-height: 0.4rem;

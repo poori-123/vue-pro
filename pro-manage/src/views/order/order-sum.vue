@@ -23,11 +23,11 @@
         <ul>
           <li class="td">
             <h4>今日</h4>
-            <h5>{{weekList[6].price}}</h5>
+            <h5>{{weekList[6].price.toFixed(2)}}</h5>
           </li>
           <li class="yd">
             <h4>昨日</h4>
-            <h5>{{weekList[5].price}}</h5>
+            <h5>{{weekList[5].price.toFixed(2)}}</h5>
           </li>
           <li class="week">
             <h4>近7日</h4>
@@ -70,6 +70,7 @@
 <script>
 import { mapState } from 'vuex';
 import { Area } from '@antv/g2plot';
+import { log } from '@antv/g2plot/lib/utils';
 export default {
   computed: {
     ...mapState({
@@ -85,7 +86,7 @@ export default {
       var td_0time = d.getTime(); /* 今日零时的时间戳 */
       var one = 24*60*60*1000;  /* 一天的毫秒数 */
       var td_24time = td_0time + one; /* 今日24时的时间戳 */
-
+      console.log(one);
       var weekList = [];
 
       for(var i = 0; i < 7; i++){
@@ -111,11 +112,10 @@ export default {
         list.forEach(item => {
           p += Number(item.price);
         });
-
         var obj = {
           count: list.length,
           date: str,
-          price: p.toFixed(2)
+          price: Number(p.toFixed(2))
         }
         weekList.push(obj);
 
@@ -126,7 +126,7 @@ export default {
       var p = 0;
       var n = 0;
       this.weekList.forEach( item => {
-        p += Number(item.price);
+        p += item.price;
         n += item.count;
       } );
       return {

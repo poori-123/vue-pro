@@ -86,7 +86,6 @@ router.get('/editDish', async (req,res)=>{
 /* 客户端获取所有菜品列表 */
 router.get('/getAll', async (req,res)=>{
     var result = await dish.find().sort({dishSales: -1});
-    console.log(result);
     if(result){
         res.status(200).json({code:0, message: '获取成功!', dishes: result});
     }else{

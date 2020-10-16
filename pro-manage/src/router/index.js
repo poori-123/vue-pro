@@ -69,6 +69,15 @@ router.beforeEach( async(to, from, next)=>{
 } );
 
 router.beforeEach( (to,from,next)=>{
+  if(to.name === 'login' || to.name === 'forgetPassword'){
+    next();
+    return;
+  }
+  if(!localStorage.getItem('loguser')){
+    next({name:'login'});
+    return
+  }
+  
   var user = JSON.parse(localStorage.getItem('loguser'));
   if(user.isAdmin){
     next();
